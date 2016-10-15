@@ -2,15 +2,25 @@
 (function () {
 	var app = angular.module('pokedex', [
 		'ngRoute',
-		'httpPostFix',
-		'pokedex.services'
+		'httpPostFix'
 	]);
 
 	app.config(['$routeProvider', function ($routeProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl : 'views/instructions.html'
+				templateUrl : 'views/home.html'
 			})
+			.when('/viewPokemons', {
+			controller: 'viewPokeCtrl',
+			templateUrl: 'views/viewPokemons.html'
+			})
+			.when('/createPokemon', {
+			controller: 'createPokemonCtrl',
+			templateUrl: 'views/createPokemon.html'
+			})
+			.when('/instructions', {
+			templateUrl: 'views/instructions.html'
+			})		
 	}]);
 
 })();

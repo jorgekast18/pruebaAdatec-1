@@ -5,7 +5,8 @@ module.exports = function (grunt) {
       server : {
         options : {
           port     : 9000,
-          base     : 'public/'
+          base     : 'public/',
+		  hostname: '127.0.0.1'
         }
       }
     }, 
@@ -22,7 +23,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   //only listen
-  grunt.registerTask('default', [
+  grunt.registerTask('server', [
     'connect', 'watch'
   ]);
 
