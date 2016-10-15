@@ -1,0 +1,81 @@
+<section class="content-header">
+  <h1>
+    Registrar nuevo pokemon 
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#/"><i class="fa fa-home"></i> Inicio</a></li>
+    <li><a href="#/">Pokemons</a></li>
+    <li class="active">Registrar nuevo pokemon</li>
+  </ol>
+</section>
+
+<section class="content">
+	<div class="row">
+		<div ng-show="errorServer" class="jumbotron col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<h3 align="center" class="text-danger">{{msg}}</h3>
+		</div>
+		<div ng-hide="errorServer">  
+			<div class="jumbotron col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">  
+				<form id="form" role="form" name="form">			
+					
+					<div class="form-group" ng-class="{'has-error': form.name.$invalid, 'has-success': form.name.$valid}">
+					  			<label for="name">Nombre Pokémon</label>
+					  			<input id="name" type="text" placeholder="Pokemon Name" class="form-control" name="name" ng-model="pokemon.name" required>
+					  			<div ng-show="form.name.$dirty && form.name.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.name.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>			
+
+							<div class="form-group" ng-class="{'has-success': form.type.$valid, 'has-error': form.type.$invalid}">
+					  			<label for="type">Tipo</label>	
+					  			<select name="type" id="type" ng-model="pokemon.type" class="form-control" required>
+								  <option ng-repeat="type in types" value="{{type.id}}">{{type.id}}</option>
+								</select>	  		
+					  			<div ng-show="form.type.$dirty && form.type.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.type.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>
+								
+							<div class="form-group" ng-class="{'has-success': form.ability.$valid, 'has-error': form.ability.$invalid}">
+					  			<label for="ability">Habilidad</label>
+					  			<input id="ability" type="text" placeholder="Overgrow" class="form-control" name="ability" ng-model="pokemon.ability" required>		  		
+					  			<div ng-show="form.ability.$dirty && form.ability.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.ability.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>	
+
+							<div class="form-group" ng-class="{'has-error': form.numWeight.$invalid, 'has-success': form.numWeight.$valid}">  
+					  			<label for="numWeight">Peso</label>
+					  			<input id="numWeight" type="number" placeholder="Cantidad"  class="form-control" name="numWeight" ng-model="pokemon.weight" required>
+					  			<div ng-show="form.numWeight.$dirty && form.numWeight.$invalid">
+					        		<p class="help-block text-danger" ng-show="form.numWeight.$error.required">Campo obligatorio</p>
+					    			<p class="help-block text-danger" ng-show="form.numWeight.$error.number">Campo numerico</p>
+					  			</div>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': form.numHeight.$invalid, 'has-success': form.numHeight.$valid}">
+								<label for="numHeight">Altura</label>
+					  			<input id="numHeight" type="number" placeholder="10 m"  class="form-control" name="numHeight" ng-model="pokemon.height" required>
+					  			<div ng-show="form.numHeight.$dirty">
+					  				<p class="help-block text-danger" ng-show="form.numHeight.$error.required">Campo obligatorio</p>
+					    			<p class="help-block text-danger" ng-show="form.numHeight.$error.number">Campo numerico</p>
+					  			</div>
+							</div>
+
+							<div class="form-group" ng-class="{'has-success': form.description.$valid, 'has-error': form.description.$invalid}">
+					  			<label for="description">Descripción</label>
+					  			<input id="description" type="text" placeholder="Type" class="form-control" name="description" ng-model="pokemon.description" required>		  		
+					  			<div ng-show="form.description.$dirty && form.description.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.description.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>	
+
+					<div align="center">
+			        	<button class="btn btn-lg btn-primary" type="submit" ng-click="setPokemon(pokemon)" ng-disabled="form.$invalid">Registrar Pokémon</button>
+			    	</div>
+			    	<h3 align="center"><p class="text-danger">{{msg}}</p></h3>
+			    </form>    
+			</div>
+		</div>
+	</div>
+</section>

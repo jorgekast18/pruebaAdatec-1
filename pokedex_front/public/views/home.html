@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>Pokedex</h1>
+    </div>
+    <div class="panel-body">
+        <h2><p>Prueba para aspirar al cargo de desarrollador en ADATEC</p></h2>
+        <img src="img/angular.png" class="img-home">
+        <img src="img/plus.png" class="img-home-plus">
+        <img src="img/django.png" class="img-home-django">
+        <img src="img/equal.png" class="img-home-equal">
+        <img src="img/adatec.png" class="img-home-adatec">
+        
+        <hr>
+        <h2><p>Descripción de la solución:</p></h2>
+        <hr>
+        <p>Pokedex es un sistema que permite consultar los Pokemons que se encuentran en el sistema por medio de un WebService,además se crearon WebServices diferentes para las tareas de Crear, Modificar y Eliminar un Pokemon.</p>
+        <h2><p>Archivos creados:</p></h2>
+        <hr>
+        <p>En AngularJs se crearon 4 archvios, 2 Servicios y 2 controladores, además de las respectivas vistas.</p>
+        <ol>
+            <li><span class="services-span ">services: </span>createPokemon.js</li>
+            <li><span class="services-span ">services: </span>viewPokemon.js</li>
+            <li><span class="services-span ">controllers: </span>createPokemon.js</li>
+            <li><span class="services-span ">controllers: </span>viewPokemon.js</li>
+        </ol> 
+        <hr>
+        <p>En Django se creó el ambiente virtual "python", se migró la base de datos "db.sqlite3" y se creó el usuario "admin", seguidamente se procede a configurar los diferentes archivos de python para que respondan a las peticiones que se hagan por medio de AngularJs.</p> 
+        <hr>
+        <p>El primer archivo que se configró fue "admin.py" para que se mostrara en el administrador la tabla (Pokemon) qe se creó en el modelo</p> 
+        <hr>
+        <p>Seguidamente se configuró el archivo "urls.py", para cuando llegue una petición reconozca los datos que están en la url y se dirija al archivo "views.py", en el cual se configuraron 2 funciones ("poke_list" y "poke_detail") las cuales identifican las peticiones que se reciben ("POST", "GET", "PUT", "OPTION", "DELETE") y de esa forma retorna los datos de acuerdo a la petición.</p>      
+    </div>
+</div>

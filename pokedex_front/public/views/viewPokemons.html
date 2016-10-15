@@ -1,0 +1,139 @@
+<hr>
+<h1>Pockedex</h1>
+<hr>
+<div ng-show="errorServer" class="jumbotron col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	<h3 align="center" class="text-danger">{{msg}}</h3>
+</div>
+<div ng-hide="errorServer">    
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+				<input type="text" class="form-control" placeholder="Buscar pokémon por nombre" ng-model="search.name">
+			</div>
+		</div>
+		<div class="panel-body">
+          	<div class="table-responsive" style="height:320px; overflow: auto;">
+            	<table class="table table-hover">
+					<thead>
+						<tr>							
+							<th>Name</th>
+							<th>Type</th>
+							<th>Ability</th>														
+							<th>Weight</th>
+							<th>Height</th>
+							<th>Description</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="pokemon in retPokemons | orderBy:selectedOrden | filter:search">							
+							<td>{{pokemon.name}}</td>
+							<td>{{pokemon.type}}</td>
+							<td>{{pokemon.ability}}</td>
+							<td>{{pokemon.weight}}</td>	
+							<td>{{pokemon.height}}</td>						
+							<td>{{pokemon.description}}</td>							
+							<!-- Button trigger modal -->
+							<td>
+								<button class="btn btn-primary btn-sm" type="submit" ng-click="getDetail(pokemon.pk)" data-toggle="modal" data-target="#myModalUpdate"><span class="glyphicon glyphicon-edit"></span></button>
+							</td>
+							<td>
+								<button class="btn btn-sm btn-danger" type="submit" ng-click="setDeletePokemon(pokemon.pk)" data-toggle="modal" data-target="#myModalDelete"><span class="glyphicon glyphicon-remove"></span></button>
+							</td>														
+						</tr>
+					</tbody>
+				</table>
+				<h3 align="center" class="text-danger">{{msg}}</h3>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Pokemon Edit</h4>
+					</div>
+					<div class="modal-body">
+						<form id="form" role="form" name="form">
+																					
+							<div class="form-group" ng-class="{'has-error': form.name.$invalid, 'has-success': form.name.$valid}">
+					  			<label for="name">Nombre Pokémon</label>
+					  			<input id="name" type="text" placeholder="Pokemon Name" class="form-control" name="name" ng-model="retDetailPokemon.name" required>
+					  			<div ng-show="form.name.$dirty && form.name.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.name.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>			
+
+							<div class="form-group" ng-class="{'has-success': form.type.$valid, 'has-error': form.type.$invalid}">
+					  			<label for="type">Tipo</label>	
+					  			<select name="type" id="type" ng-model="retDetailPokemon.type" class="form-control" required>
+								  <option ng-repeat="type in types" value="{{type.id}}">{{type.id}}</option>
+								</select>	  		
+					  			<div ng-show="form.type.$dirty && form.type.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.type.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>
+								
+							<div class="form-group" ng-class="{'has-success': form.ability.$valid, 'has-error': form.ability.$invalid}">
+					  			<label for="ability">Habilidad</label>
+					  			<input id="ability" type="text" placeholder="Overgrow" class="form-control" name="ability" ng-model="retDetailPokemon.ability" required>		  		
+					  			<div ng-show="form.ability.$dirty && form.ability.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.ability.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>	
+
+							<div class="form-group" ng-class="{'has-error': form.numWeight.$invalid, 'has-success': form.numWeight.$valid}">  
+					  			<label for="numWeight">Peso</label>
+					  			<input id="numWeight" type="number" placeholder="Cantidad"  class="form-control" name="numWeight" ng-model="retDetailPokemon.weight" required>
+					  			<div ng-show="form.numWeight.$dirty && form.numWeight.$invalid">
+					        		<p class="help-block text-danger" ng-show="form.numWeight.$error.required">Campo obligatorio</p>
+					    			<p class="help-block text-danger" ng-show="form.numWeight.$error.number">Campo numerico</p>
+					  			</div>
+							</div>
+
+							<div class="form-group" ng-class="{'has-error': form.numHeight.$invalid, 'has-success': form.numHeight.$valid}">
+								<label for="numHeight">Altura</label>
+					  			<input id="numHeight" type="number" placeholder="10 m"  class="form-control" name="numHeight" ng-model="retDetailPokemon.height" required>
+					  			<div ng-show="form.numHeight.$dirty">
+					  				<p class="help-block text-danger" ng-show="form.numHeight.$error.required">Campo obligatorio</p>
+					    			<p class="help-block text-danger" ng-show="form.numHeight.$error.number">Campo numerico</p>
+					  			</div>
+							</div>
+
+							<div class="form-group" ng-class="{'has-success': form.description.$valid, 'has-error': form.description.$invalid}">
+					  			<label for="description">Descripción</label>
+					  			<input id="description" type="text" placeholder="Type" class="form-control" name="description" ng-model="retDetailPokemon.description" required>		  		
+					  			<div ng-show="form.description.$dirty && form.description.$invalid">
+					    			<p class="help-block text-danger" ng-show="form.description.$error.required">Campo obligatorio</p>
+					  			</div>
+							</div>															
+					    	<h3 align="center"><p class="text-success">{{msgUpdate}}</p></h3>
+					    </form>    
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" ng-click="updateSale(retDetailPokemon)" ng-disabled="form.$invalid">Guardar cambios</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">¿Está eguro que desea eliminar el pokémon?</h4>
+					</div>					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-danger" ng-click="deletePokemon()">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
